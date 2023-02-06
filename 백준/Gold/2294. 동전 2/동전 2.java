@@ -7,26 +7,19 @@ public class Main {
 		int k = sc.nextInt();
 		int coin;
 		int[] dp = new int[k+1];
-		dp[0] = 1;
-		int[] dpCnt = new int[k+1];
 		
-		for (int i = 1; i < n+1; i++) {
+		for (int i = 0; i <= k; i++)
+			dp[i] = 10001;
+		dp[0] = 0;
+		
+		for (int i = 0; i < n; i++) {
 			coin = sc.nextInt();
-			for (int j = coin+1; j <= k; j++) {
-				dp[coin] = 1;
-				dpCnt[coin] = 1;
-				dp[j] += dp[j - coin];
-				if (dp[j] != 0) {
-					if (dpCnt[j] > 0 && dpCnt[j] < dpCnt[j-coin]+1)
-						continue;
-					if (dpCnt[j-coin] > 0)
-						dpCnt[j] = dpCnt[j-coin]+1;
-				}
+			for (int j = coin; j <= k; j++) {
+				dp[j] = Math.min(dp[j], dp[j-coin]+1);
 			}
 		}
-		if (dpCnt[k] > 0)
-			System.out.println(dpCnt[k]);
-		else System.out.println(-1);
 		
+		if (dp[k] == 10001) System.out.println(-1);
+		else System.out.println(dp[k]);
 	}
 }
