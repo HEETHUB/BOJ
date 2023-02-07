@@ -17,18 +17,15 @@ public class Main  {
 		int ans = 0;
 		int idx = 0;
 		cnt[0]++;
+        
 		while (true) {
 			if (cnt[idx] == M) break;
-			if (cnt[idx]%2 == 1) {
-				idx = (idx+L)%N;
-				cnt[idx]++;
-				ans++;
-			}
-			else {
-				idx = (idx+N-L)%N;
-				cnt[idx]++;
-				ans++;
-			}
+			if (cnt[idx]%2 == 1) 
+                idx = (idx+L)%N;
+			else 
+                idx = (idx+N-L)%N;
+            cnt[idx]++;
+        	ans++;
 		}
 		
 		bw.write(String.valueOf(ans));
