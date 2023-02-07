@@ -14,10 +14,9 @@ public class Main {
 		for (int i = 1; i < N+1; i++)
 			A[i] = Integer.parseInt(st.nextToken());
 		
-		int temp = 0;
 		int ans = 1;
 		for (int i = 1; i <= N; i++) {
-			for (int j = i-1; j >= 0; j--) {
+			for (int j = 0; j < i; j++) {
 				if (A[i] > A[j]) 
 					dp[i] = Math.max(dp[i], dp[j]+1);
 			}
