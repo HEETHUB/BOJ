@@ -7,6 +7,16 @@ import java.util.LinkedList;
 import java.util.StringTokenizer;
 
 public class Main {
+	static class Node{
+		public int value;
+		public int idx;
+		
+		Node(int value, int idx){
+			this.value = value;
+			this.idx = idx;
+		}
+	}
+	
 	public static void main(String[] args) throws Exception {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
@@ -14,43 +24,21 @@ public class Main {
 		int N = Integer.parseInt(st.nextToken());
 		int L = Integer.parseInt(st.nextToken());
 		st = new StringTokenizer(br.readLine());
-		int[] arr = new int[N];
-	
-		for (int i = 0; i < N; i++)
-			arr[i] = Integer.parseInt(st.nextToken());
-		Deque<Integer> queue = new LinkedList<>();
-	
-		int start = -L+1;
-		int end = 0;
-		queue.addLast(arr[end]);
-		bw.write(String.valueOf(queue.peek())+" ");
+		Deque<Node> deque = new LinkedList<>();
 		
-		while (end < N-1) {
-			if (start < 0) {
-				start++;
-				end++;
-				while (true) {
-					if ( queue.isEmpty() || queue.peekLast() <= arr[end]) {
-						queue.addLast(arr[end]);
-						break;
-					} else queue.removeLast();
-				}
-				bw.write(String.valueOf(queue.peekFirst())+" ");
-			}
-			else {
-				end++;
-				if (queue.peekFirst() == arr[start])
-					queue.removeFirst();
-					
-				while (true) {
-					if ( queue.isEmpty() || queue.peekLast() <= arr[end]) {
-						queue.addLast(arr[end]);
-						break;
-						} else queue.removeLast();
-				}
-				bw.write(String.valueOf(queue.peekFirst())+" ");
-				start++;
-			}
+		for (int i = 0; i < N; i++) {
+			int cur = Integer.parseInt(st.nextToken());
+			// 새로운 값이 들어올 때마다 정렬하는 대신 현재 수보다 큰 값을 덱에서 제거하여 시간복잡도 줄이
+			
+			while (!deque.isEmpty() && deque.getLast().value > cur)
+				deque.removeLast();
+			
+			deque.addLast(new Node(cur, i));
+			// 범위에서 벗어난 값은 덱에서 제거
+			if (deque.getFirst().idx <= i - L) 
+				deque.removeFirst();
+			
+			bw.write(deque.getFirst().value + " ");
 		}
 		bw.flush();
 		bw.close();
