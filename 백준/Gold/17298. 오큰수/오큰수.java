@@ -16,19 +16,16 @@ public class Main {
 		
 		int[] ans = new int[N];
 		Stack<Integer> stack = new Stack<>();
-		for (int i = N-1; i >= 0; i--) {
-			while (true) {
-				if (stack.isEmpty()) {
-					ans[i] = -1;
-					stack.push(A[i]);
-					break;
-				} else if (stack.peek() > A[i]){
-					ans[i] = stack.peek();
-					stack.push(A[i]);
-					break;
-				} else stack.pop();
+		stack.push(0); // 처음에는 항상 스택이 비어있으므로 최초 값을 push
+		for (int i = 1; i < N; i++) {
+			// stack이 비어있지 않고 현재 수열이 스택의 top index가 가리키는 수열보다 클 경우
+			while (!stack.isEmpty() && A[stack.peek()] < A[i]) {
+				ans[stack.pop()] = A[i]; // 정답 배열에 오큰수를 현재 수열로 저
 			}
+			stack.push(i); // 신규 데이터 push
 		}
+		while (!stack.isEmpty())
+			ans[stack.pop()] = -1;
 		
 		for (int a : ans)
 			sb.append(a).append(" ");
