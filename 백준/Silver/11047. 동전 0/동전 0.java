@@ -5,18 +5,18 @@ public class Main {
 		Scanner sc = new Scanner(System.in);
 		int N = sc.nextInt();
 		int K = sc.nextInt();
-		int[] dp = new int[K+1];
-		int coin = 0;
+		int[] coins = new int[N];
 		
-		for (int i = 1; i <= K; i++)
-			dp[i] = 100000001;
+		for (int i = 0; i < N; i++)
+			coins[i] = sc.nextInt();
 		
-		for (int i = 0; i < N; i++) {
-			coin = sc.nextInt();
-			for (int j = coin; j <= K; j++) {
-				dp[j] = Math.min(dp[j], dp[j-coin]+1);
-			}
+		int ans = 0;
+		for (int i = N-1; i >= 0; i--) {
+			ans += K/coins[i];
+			K %= coins[i];
+			if (K == 0) break;
 		}
-		System.out.println(dp[K]);
+		
+		System.out.println(ans);
 	}
 }
