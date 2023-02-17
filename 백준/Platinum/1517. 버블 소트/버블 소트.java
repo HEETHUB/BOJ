@@ -21,19 +21,8 @@ public class Main {
 	
 	public static void mergeSort(long[] arr) {
 		sorted = new long[arr.length];
-		mergeSortHelp(arr, 0, arr.length-1);
+		mergeSortHelp_BU(arr, 0, arr.length-1);
 		sorted = null;
-	}
-	
-	private static void mergeSortHelp(long[] arr, int left, int right) {
-		if (left == right) return;
-		
-		int mid = (left + right)/2;
-		
-		mergeSortHelp(arr, left, mid);
-		mergeSortHelp(arr, mid+1, right);
-		
-		merge(arr, left, mid, right);
 	}
 	
 	private static void merge(long[] arr, int left, int mid, int right) {
@@ -62,5 +51,18 @@ public class Main {
 		
 		for (int i = left; i <= right; i++)
 			arr[i] = sorted[i];
-	}	
+	}
+	
+	private static void mergeSortHelp_BU(long[] arr, int left, int right) {
+		if (left == right) return;
+		
+		for (int size = 1; size <= right; size += size) {
+			for (int l = left; l <= right-size; l += 2*size) {
+				int start = l;
+				int mid = l + size - 1;
+				int end = Math.min(l + 2*size - 1, right);
+				merge(arr, start, mid, end);
+			}
+		}
+	}
 }
