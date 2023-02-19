@@ -18,27 +18,23 @@ public class Main {
 		long pick1 = 0;
 		long pick2 = 0;
 		long pick3 = 0;
-
-		long[][] sum = new long[N][N];
-		for (int i = 0; i < N; i++) {
-			for (int j = i + 1; j < N; j++)
-				sum[i][j] = arr[i] + arr[j];
+       
+		for (int mid = 1; mid < N-1; mid++) {
 			int left = 0;
-			int right = N - 1;
-			while (left < i && right > i) {
-				long temp = arr[left] + sum[i][right];
+			int right = N-1;
+			while (left < mid && right > mid) {
+				long temp = arr[left] + arr[mid] + arr[right];
 				if (Math.abs(temp) < min) {
 					min = Math.abs(temp);
 					pick1 = arr[left];
-					pick2 = arr[i];
+					pick2 = arr[mid];
 					pick3 = arr[right];
 				}
-				if (temp > 0)
-					right--;
-				else
-					left++;
+				if (temp > 0) right--;
+				else left++;
 			}
 		} // N^2
-		System.out.println(pick1 + " " + pick2 + " " + pick3);
+		System.out.println(pick1+" "+pick2+" "+pick3);
+		
 	}
 }
