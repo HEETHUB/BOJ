@@ -16,20 +16,20 @@ public class Main {
 		
 		int left = 0;
 		int right = N-1;
-		int max = 2000000000;
-		int ansLeft = 0;
-		int ansRight = 0;
+		int min = Integer.MAX_VALUE;
+		int ans1 = 0;
+		int ans2 = 0;
 		while(left < right) {
 			int temp = arr[left] + arr[right];
-			if (Math.abs(temp) < max) {
-				max = Math.abs(temp);
-				ansLeft = arr[left];
-				ansRight = arr[right];
+			if (Math.abs(temp) < min) {
+				min = Math.abs(temp);
+				ans1 = arr[left];
+				ans2 = arr[right];
 			}
 			
 			if (temp > 0) right--;
 			else left++;
 		}
-		System.out.println(ansLeft+" "+ansRight);
+		System.out.println(ans1+" "+ans2);
 	}
 }
