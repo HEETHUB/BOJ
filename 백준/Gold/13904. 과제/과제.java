@@ -29,18 +29,18 @@ public class Main {
 		});
 
 		int[] day = new int[max + 1];
-
+		int ans = 0;
+		
 		for (Integer[] work : arr) {
 			for (int j = work[0]; j >= 1; j--) {
 				if (day[j] == 0) {
 					day[j] = work[1];
+					ans += work[1];
 					break;
 				}
 			}
 		}
-		int ans = 0;
-		for (int d : day)
-			ans += d;
+		
 		System.out.println(ans);
 	}
 }
