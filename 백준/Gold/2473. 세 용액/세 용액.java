@@ -15,10 +15,10 @@ public class Main {
 		Arrays.sort(arr); // NlogN
 
 		long min = Long.MAX_VALUE;
-		long pick1 = 0;
-		long pick2 = 0;
-		long pick3 = 0;
-       
+		long ans1 = 0;
+		long ans2 = 0;
+		long ans3 = 0;
+		
 		for (int mid = 1; mid < N-1; mid++) {
 			int left = 0;
 			int right = N-1;
@@ -26,15 +26,14 @@ public class Main {
 				long temp = arr[left] + arr[mid] + arr[right];
 				if (Math.abs(temp) < min) {
 					min = Math.abs(temp);
-					pick1 = arr[left];
-					pick2 = arr[mid];
-					pick3 = arr[right];
+					ans1 = arr[left];
+					ans2 = arr[mid];
+					ans3 = arr[right];
 				}
 				if (temp > 0) right--;
 				else left++;
 			}
-		} // N^2
-		System.out.println(pick1+" "+pick2+" "+pick3);
-		
+		}
+		System.out.println(ans1+" "+ans2+" "+ans3);
 	}
 }
