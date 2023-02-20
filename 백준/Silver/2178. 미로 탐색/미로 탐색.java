@@ -1,6 +1,5 @@
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
-import java.util.Arrays;
 import java.util.LinkedList;
 import java.util.Queue;
 import java.util.StringTokenizer;
@@ -9,10 +8,8 @@ public class Main {
 	static int N;
 	static int M;
 	static int[][] maze;
-	static int cnt = 0;
 	static int[] dr = {0, 0, 1, -1};
 	static int[] dc = {1, -1, 0, 0};
-	static boolean[][] visited;
 	
 	public static void main(String[] args) throws Exception {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
@@ -20,7 +17,6 @@ public class Main {
 		N = Integer.parseInt(st.nextToken());
 		M = Integer.parseInt(st.nextToken());
 		maze = new int[N][M];
-		visited = new boolean[N][M];
 	
 		for (int i = 0; i < N; i++) {
 			String m = br.readLine();
