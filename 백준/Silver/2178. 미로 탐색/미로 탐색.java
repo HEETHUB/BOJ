@@ -30,26 +30,24 @@ public class Main {
 	}
 
 	private static void bfs(int i, int j, int depth) {
-		Queue<Integer> queue = new LinkedList<>();
-		queue.offer(i);
-		queue.offer(j);
+		Queue<int[]> queue = new LinkedList<>();
+		int[] node = new int[] {i, j};
+		queue.offer(node);
 		
 		while (!queue.isEmpty()) {
-			int r = queue.poll(); 
-			int c = queue.poll();
+			node = queue.poll();
 			
-			if (r == N-1 && c == M-1) {
+			if (node[0] == N-1 && node[1] == M-1) {
 				break;
 			}
 			
 			for (int k = 0; k < 4; k++) {
-				int nr = r + dr[k];
-				int nc = c + dc[k];
+				int nr = node[0] + dr[k];
+				int nc = node[1] + dc[k];
 				if (nr >= 0 && nr < N && nc >= 0 && nc < M) {
 					if (maze[nr][nc] == 1) {
-						queue.offer(nr);
-						queue.offer(nc);
-						maze[nr][nc] = maze[r][c] + 1;
+						queue.offer(new int[] {nr, nc});
+						maze[nr][nc] = maze[node[0]][node[1]] + 1;
 					}
 				}
 			}
