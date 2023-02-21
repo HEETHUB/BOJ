@@ -1,8 +1,5 @@
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
-import java.util.Arrays;
-import java.util.LinkedList;
-import java.util.List;
 import java.util.Stack;
 
 public class Main {
@@ -41,8 +38,8 @@ public class Main {
 	
 	private static int priority(char c) {
 		if (c == '(' || c == ')') return 0;
-		else if (c == '*' || c == '/') return 2;
 		else if (c == '+' || c == '-') return 1;
+		else if (c == '*' || c == '/') return 2;
 		return -1;
 	}
 }
