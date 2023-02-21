@@ -1,5 +1,6 @@
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Stack;
@@ -8,11 +9,12 @@ import java.util.StringTokenizer;
 public class Main {
 	static int[][] sudoku;
 	static boolean finish;
+	static ArrayList<int[]> zero;
 	
 	public static void main(String[] args) throws Exception {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		sudoku = new int[9][9];
-		Stack<int[]> zero = new Stack<>();
+		zero = new ArrayList<>();
 		
 		for (int i = 0; i < 9; i++) {
 			StringTokenizer st = new StringTokenizer(br.readLine());
@@ -22,8 +24,8 @@ public class Main {
 					zero.add(new int[] {i, j});
 			}
 		}
-		int[] start = zero.pop();
-		make(zero, start, check(start));
+		int start = 0;
+		make(start, check(zero.get(start)));
 		
 		StringBuilder sb = new StringBuilder();
 		for (int i = 0; i < 9; i++) {
@@ -36,8 +38,9 @@ public class Main {
 		System.out.println(sb);
 	}
 	
-	private static void make(Stack<int[]> stack, int[] node, int[] set) {
-		if (stack.isEmpty()) {
+	private static void make(int idx, int[] set) {
+		int[] node = zero.get(idx);
+		if (idx == zero.size()-1) {
 			for (int i = 1; i <= 9; i++) {
 				if (set[i] > 0)
 					sudoku[node[0]][node[1]] = set[i];
@@ -50,11 +53,9 @@ public class Main {
 			for (int i = 1; i <= 9; i++) {
 				if (set[i] > 0) {
 					sudoku[node[0]][node[1]] = set[i];
-					int[] temp = stack.pop();
-					make(stack, temp, check(temp));
+					make(idx+1, check(zero.get(idx+1)));
 					if (finish) return;
 					sudoku[node[0]][node[1]] = 0;
-					stack.add(temp);
 				}
 			}
 		}
