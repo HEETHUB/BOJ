@@ -1,36 +1,36 @@
-import java.util.Arrays;
-import java.util.Comparator;
+import java.util.Collections;
+import java.util.PriorityQueue;
 import java.util.Scanner;
 
 public class Main {
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
 		int N = sc.nextInt();
-		Integer[] arr = new Integer[N];
+		PriorityQueue<Integer> queuePlus = new PriorityQueue<>(Collections.reverseOrder());
+		PriorityQueue<Integer> queueMinus = new PriorityQueue<>();
+		int zero = 0;
 		int ans = 0;
 		
-		for (int i = 0; i < N; i++)
-			arr[i] = sc.nextInt();
-		
-		Arrays.sort(arr, new Comparator<Integer>() {
-			@Override
-			public int compare(Integer o1, Integer o2) {
-				if (o1 == 0) return -1;
-				if (o2 == 0) return 1;
-				if (o1 * o2 > 0) return Math.abs(o1) - Math.abs(o2);
-				else return o1 - o2;
-			}
-		});
-		
-		int idx = arr.length-1;
-		while (idx >= 0) {
-			if (idx == 0) ans += arr[idx--];
-			else if (arr[idx] * arr[idx-1] > arr[idx] + arr[idx-1]) {
-				ans += arr[idx] * arr[idx-1];
-				idx -= 2;
-			} else ans += arr[idx--];
+		for (int i = 0; i < N; i++) {
+			int num = sc.nextInt();
+			if (num == 0) zero++;
+			else if (num == 1) ans++;
+			else if (num > 1) queuePlus.add(num);
+			else queueMinus.add(num);
 		}
 		
+		while (queuePlus.size() > 1) 
+			ans += queuePlus.poll()*queuePlus.poll();
+		
+		if (queuePlus.size() == 1) ans += queuePlus.poll();
+		
+		while (queueMinus.size() > 1)
+			ans += queueMinus.poll()*queueMinus.poll();
+		
+		if (!queueMinus.isEmpty()) {
+			if (zero == 0) ans += queueMinus.poll(); 
+		}
+
 		System.out.println(ans);
 	}
 }
