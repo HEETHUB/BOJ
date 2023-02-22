@@ -1,6 +1,5 @@
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
-import java.util.Arrays;
 import java.util.PriorityQueue;
 
 public class Main {
@@ -9,10 +8,10 @@ public class Main {
 		int N = Integer.parseInt(br.readLine());
 		PriorityQueue<Integer> queue = new PriorityQueue<>();
 
-		int ans = 0;
 		for (int i = 0; i < N; i++) 
 			queue.add(Integer.parseInt(br.readLine()));
 		
+		int ans = 0;
 		while (queue.size() > 1) {
 			int pick1 = queue.poll();
 			int pick2 = queue.poll();
