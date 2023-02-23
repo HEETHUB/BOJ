@@ -22,40 +22,32 @@ public class Main {
 					visited[i][j] = true;
 			}
 		}
-//		for (boolean[] v : visited) System.out.println(Arrays.toString(v));
 		
 		for (int i = 0; i < R; i++) {
-			fin = false;
-			visited[i][0] = true;
-			pipeLine(i, 0);
+			if (pipeLine(i, 0))
+				ans++;
 		}
 			
-//		for (boolean[] v : visited) System.out.println(Arrays.toString(v));
 		System.out.println(ans);
 	}
 
-	private static void pipeLine(int r, int c) {
-		if (c == C-1) {
-			ans++;
-			fin = true;
-//			for (boolean[] v : visited) System.out.println(Arrays.toString(v));
-			return;
-		}
+	private static boolean pipeLine(int r, int c) {
+		visited[r][c] = true;
 		
-		int[] dr = {-1, 0, 1};
-		int[] dc = {1, 1, 1};
+		if (c == C-1) 
+			return true;
 		
-		for (int k = 0; k < 3; k++) {
-			int nr = r + dr[k];
-			int nc = c + dc[k];
-			if (nr >= 0 && nr < R && nc >= 0 && nc < C) {
-				if (!visited[nr][nc]) {
-					visited[nr][nc] = true;
-					pipeLine(nr, nc);
-					if (fin) break;
-//					visited[nr][nc] = false;
-				}
-			}
-		}
+		if (boundary(r-1, c+1) && !visited[r-1][c+1] && pipeLine(r-1, c+1)) 
+			return true;
+		if (boundary(r, c+1) && !visited[r][c+1] && pipeLine(r, c+1)) 
+			return true;
+		if (boundary(r+1, c+1) && !visited[r+1][c+1] && pipeLine(r+1, c+1)) 
+			return true;
+		return false;
+	}
+	
+	private static boolean boundary(int r, int c) {
+		if (r >= 0 && r < R && c >= 0 && c < C) return true;
+		return false;
 	}
 }
