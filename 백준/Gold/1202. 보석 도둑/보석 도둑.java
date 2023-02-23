@@ -28,9 +28,9 @@ public class Main {
 				return o1[0] - o2[0];
 			}
 		});
+		
 		Arrays.sort(C);
-//		for (int[] j : jewels) System.out.println(Arrays.toString(j));
-//		System.out.println(Arrays.toString(C));
+		
 		PriorityQueue<Integer> pq = new PriorityQueue<>(new Comparator<Integer>() {
 			@Override
 			public int compare(Integer o1, Integer o2) {
