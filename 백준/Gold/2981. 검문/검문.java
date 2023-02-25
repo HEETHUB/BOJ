@@ -19,9 +19,8 @@ public class Main {
 		int gcd = 0;
 		for (int i = arr[1] - arr[0]; i >= 2; i--) {
 			boolean check = true;
-			long mod = arr[0]%i;
 			for (int j = 1; j < N; j++) {
-				if (arr[j]%i != mod) {
+				if (arr[j]%i > 0) {
 					check = false;
 					break;
 				}
