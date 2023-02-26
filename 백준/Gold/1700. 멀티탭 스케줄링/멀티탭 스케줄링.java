@@ -1,8 +1,6 @@
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
-import java.util.Comparator;
 import java.util.LinkedList;
-import java.util.PriorityQueue;
 import java.util.Queue;
 import java.util.StringTokenizer;
 
@@ -15,6 +13,7 @@ public class Main {
 		int K = Integer.parseInt(st.nextToken());
 		
 		Queue<Integer>[] products = new LinkedList[K+1];
+		
 		for (int i = 0; i <= K; i++)
 			products[i] = new LinkedList<>();
 		
@@ -27,44 +26,33 @@ public class Main {
 			products[arr[i]].add(i);
 		}
 		
-//		for (int i = 1; i <= K; i++) {
-//			while (!products[i].isEmpty())
-//				System.out.println(i+" "+products[i].poll());
-//		}
-		
-		
 		boolean[] used = new boolean[K+1];
 		
 		int ans = 0;
         int k = 0;
 		for (int i = 0; i < K; i++) {
-			if (k < N) {
-                if (!used[arr[i]]) {
-                    k++;
-                    used[arr[i]] = true;
-                }
-				products[arr[i]].poll();
-			}
-			else if (used[arr[i]]) {
-				products[arr[i]].poll();
-				continue;
-			}
-			else {
+			if (!used[arr[i]]){
+				if (k < N) {
+					k++;
+					used[arr[i]] = true;
+					products[arr[i]].poll();
+					continue;
+				}
+				
 				int min = 0;
 				for (int j = 1; j <= K; j++) {
-					if (used[j] && products[j].isEmpty()) {
+					if (!used[j]) continue;
+					if (products[j].isEmpty()) {
 						min = j;
 						break;
-					} else if (used[j] && !products[j].isEmpty()) {
-						if (products[j].peek() > products[min].peek()) min = j;
-					}
+					} else if (products[j].peek() > products[min].peek())
+						min = j;
 				}
 				used[min] = false;
 				used[arr[i]] = true;
-				products[arr[i]].poll();
 				ans++;
-//				System.out.println(i + " "+arr[i]+" pop "+min+" "+ans);
 			}
+			products[arr[i]].poll();
 		}
 		System.out.println(ans);
 	}
