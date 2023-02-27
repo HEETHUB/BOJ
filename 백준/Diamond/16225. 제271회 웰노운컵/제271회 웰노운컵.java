@@ -1,6 +1,5 @@
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.PriorityQueue;
@@ -21,6 +20,7 @@ public class Main {
 				return o1.B - o2.B;
 			}
 		});
+		
 		StringTokenizer st = new StringTokenizer(br.readLine());
 		for (int i = 0; i < N; i++)
 			arr[i].A = Integer.parseInt(st.nextToken());
@@ -29,13 +29,6 @@ public class Main {
 			arr[i].B = Integer.parseInt(st.nextToken());
 			pq1.add(arr[i]);
 		}
-
-//		Arrays.sort(arr, new Comparator<node>() {
-//			@Override
-//			public int compare(node o1, node o2) {
-//				return o1.B - o2.B;
-//			}
-//		});
 
 		long ans = pq1.poll().A;
 
