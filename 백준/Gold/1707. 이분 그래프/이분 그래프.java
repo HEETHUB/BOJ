@@ -1,7 +1,6 @@
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedList;
@@ -22,9 +21,6 @@ public class Main {
 			StringTokenizer VE = new StringTokenizer(br.readLine());
 			int V = Integer.parseInt(VE.nextToken());
 			int E = Integer.parseInt(VE.nextToken());
-			HashSet<Integer>[] set = new HashSet[2];
-			set[0] = new HashSet<>();
-			set[1] = new HashSet<>();
 			
 			ans = "YES";
 			
@@ -45,6 +41,7 @@ public class Main {
 			for (int i = 1; i <= V; i++) {
 				if (divided[i] == 0)
 					bfs(i);
+				if (ans == "NO") break;
 			}
 			
 			sb.append(ans+"\n");
@@ -59,7 +56,6 @@ public class Main {
 		
 		while (!queue.isEmpty()) {
 			int node = queue.poll();
-//			System.out.println(node + " " + Arrays.toString(divided)+ " "+ ans);
 			for (int i : map.get(node)) {
 				if (divided[i] == 0) {
 					switch (divided[node]) {
