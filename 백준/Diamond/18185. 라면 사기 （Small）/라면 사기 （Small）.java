@@ -21,18 +21,20 @@ public class Main {
 			int temp = A[idx];
 			ans += 3*temp;
 			A[idx] = 0;
-			if (A[idx+1] >= A[idx+2]) {
-				int temp2 = Math.min(temp, A[idx+1] - A[idx+2]);
-				ans += 2*temp2;
-				A[idx+1] -= temp2;
-				temp -= temp2;
-			}
+//			if (A[idx+1] >= A[idx+2]) {
+//				int temp2 = Math.min(temp, A[idx+1] - A[idx+2]);
+//				ans += 2*temp2;
+//				A[idx+1] -= temp2;
+//				temp -= temp2;
+//			}
 			temp = Math.min(temp, A[idx+1]);
 			ans += 2*temp;
 			A[idx+1] -= temp;
-			temp = Math.min(temp, A[idx+2]);
-			ans += 2*temp;
-			A[idx+2] -= temp;
+//			temp = Math.min(ans, temp)
+			int temp2 = Math.min(A[idx+1], A[idx+2]);
+			int temp3 = Math.min(temp, A[idx+2]-temp2);
+			ans += 2*temp3;
+			A[idx+2] -= temp3;
 			idx++;
 		}
 		
