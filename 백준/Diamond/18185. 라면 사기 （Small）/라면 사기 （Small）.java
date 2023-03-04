@@ -13,25 +13,6 @@ public class Main {
 		
 		int idx = 0;
 		int ans = 0;
-//		while (idx < N) {
-//			if (A[idx] == 0) {
-//				idx++;
-//				continue;
-//			}
-//			int cnt = Math.min(A[idx], Math.min(A[idx+1], A[idx+2]));
-//			A[idx] -= cnt;
-//			A[idx+1] -= cnt;
-//			A[idx+2] -= cnt;
-//			ans += 7*cnt;
-//			
-//			cnt = Math.min(A[idx], A[idx+1]);
-//			A[idx] -= cnt;
-//			A[idx+1] -= cnt;
-//			ans += 5*cnt;
-//			ans += 3*A[idx];
-//			A[idx] = 0;
-//		}
-		
 		while (idx < N) {
 			if (A[idx] == 0) {
 				idx++;
@@ -41,8 +22,7 @@ public class Main {
 			ans += 3*temp;
 			A[idx] = 0;
 			if (A[idx+1] >= A[idx+2]) {
-				int diff = A[idx+1] - A[idx+2];
-				int temp2 = Math.min(temp, diff);
+				int temp2 = Math.min(temp, A[idx+1] - A[idx+2]);
 				ans += 2*temp2;
 				A[idx+1] -= temp2;
 				temp -= temp2;
