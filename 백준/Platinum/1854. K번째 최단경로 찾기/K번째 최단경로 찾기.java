@@ -36,21 +36,18 @@ public class Main {
 			node cur = pq.poll();
 			
 			for (node next : graph[cur.u]) {
-				if (dist[next.u].size() < K) {
-					dist[next.u].add(cur.v+next.v);
-					pq.add(new node(next.u, cur.v + next.v));
-				} else if (dist[next.u].size() == K && dist[next.u].peek() > cur.v+next.v) {
-					dist[next.u].poll();
+				int qSize = dist[next.u].size();
+				if (qSize < K || (qSize == K && dist[next.u].peek() > cur.v + next.v)) {
+					if (qSize == K) dist[next.u].poll();
 					dist[next.u].add(cur.v+next.v);
 					pq.add(new node(next.u, cur.v + next.v));
 				}
 			}
 		}
 		
-//		System.out.println(Arrays.toString(distance));
 		for (int i = 1; i <= N; i++) {
 			int ans = -1;
-			if (dist[i].size() >= K) ans = dist[i].poll();
+			if (dist[i].size() == K) ans = dist[i].poll();
 			sb.append(ans+"\n");
 		}
 		System.out.println(sb);
