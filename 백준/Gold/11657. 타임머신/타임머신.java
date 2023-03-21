@@ -11,17 +11,6 @@ public class Main {
 		N = Integer.parseInt(NM.nextToken());
 		M = Integer.parseInt(NM.nextToken());
 		
-//		ArrayList<edge>[] edges = new ArrayList[N+1];
-//		for (int i = 0; i <= N; i++)
-//			edges[i] = new ArrayList<>();
-//		
-//		for (int i = 0; i < M; i++) {
-//			StringTokenizer ABC = new StringTokenizer(br.readLine());
-//			int A = Integer.parseInt(ABC.nextToken());
-//			int B = Integer.parseInt(ABC.nextToken());
-//			int C = Integer.parseInt(ABC.nextToken());
-//			edges[A].add(new edge(B, C));
-//		}
 		edges = new ArrayList<>();
 		for (int i = 0; i < M; i++) {
 			StringTokenizer ABC = new StringTokenizer(br.readLine());
