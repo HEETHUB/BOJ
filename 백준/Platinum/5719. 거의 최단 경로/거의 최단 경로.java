@@ -5,9 +5,7 @@ public class Main {
 	public static void main(String[] args) throws IOException {
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 		StringBuilder sb = new StringBuilder();
-		int cnt = 0;
 		while (true) {
-			cnt++;
 			StringTokenizer NM = new StringTokenizer(br.readLine());
 			int N = Integer.parseInt(NM.nextToken());
 			int M = Integer.parseInt(NM.nextToken());
@@ -80,9 +78,7 @@ public class Main {
 				visited[cur.d] = true;
 				
 				for (edge next : edges[cur.d]) {
-					if (dist[D] - dist[cur.d] - dist_rev[next.d] == next.w) {
-						continue;
-					}
+					if (dist[D] - dist[cur.d] - dist_rev[next.d] == next.w) continue;
 					if (dist2[next.d] > dist2[cur.d] + next.w) {
 						dist2[next.d] = dist2[cur.d] + next.w;
 						pq.add(new edge(next.d, dist2[next.d]));
@@ -108,11 +104,6 @@ public class Main {
 		@Override
 		public int compareTo(edge o) {
 			return this.w - o.w;
-		}
-
-		@Override
-		public String toString() {
-			return "edge [d=" + d + ", w=" + w + "]";
 		}
 	}
 }
