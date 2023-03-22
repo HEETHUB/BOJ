@@ -22,35 +22,34 @@ public class Main {
 				inDegree[i]++;
 			}
 		}
-//		System.out.println(Arrays.toString(inDegree));
-		int[] ans = new int[N+1];
-		boolean[] visited = new boolean[N+1];
+
+		int[] end = new int[N+1];
+//		boolean[] visited = new boolean[N+1];
 		Queue<Integer> queue = new LinkedList<>();
 		for (int i = 1; i <= N; i++) {
 			if (inDegree[i] == 0) queue.add(i);
 		}
 		
+		int ans = 0;
 		while (!queue.isEmpty()) {
 			int cur = queue.poll();
 			
-			if (visited[cur]) continue;
-			visited[cur] = true;
+//			if (visited[cur]) continue;
+//			visited[cur] = true;
 			
-			ans[cur] += time[cur];
+			end[cur] += time[cur];
+			ans = Math.max(ans, end[cur]);
 			for (int next : graph[cur]) {
-				if (!visited[next]) {
-					ans[next] = Math.max(ans[next], ans[cur]);
-					inDegree[next]--;
-					if (inDegree[next] == 0) queue.add(next);
-				}
+				end[next] = Math.max(end[next], end[cur]);
+				inDegree[next]--;
+				if (inDegree[next] == 0) queue.add(next);
+//				if (!visited[next]) {
+//					end[next] = Math.max(end[next], end[cur]);
+//					inDegree[next]--;
+//					if (inDegree[next] == 0) queue.add(next);
+//				}
 			}
 		}
-		
-		int max = 0;
-		for (int i = 1; i <= N; i++)
-			max = Math.max(max, ans[i]);
-		
-//		System.out.println(Arrays.toString(ans));
-		System.out.println(max);
+		System.out.println(ans);
 	}
 }
