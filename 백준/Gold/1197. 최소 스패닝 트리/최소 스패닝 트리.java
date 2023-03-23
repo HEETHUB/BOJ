@@ -11,20 +11,20 @@ public class Main {
 		arr = new int[V+1];
 		for (int i = 0; i <= V; i++)
 			arr[i] = i;
-		ArrayList<edge> edges = new ArrayList<>();
+		PriorityQueue<edge> pq = new PriorityQueue<>();
 		for (int i = 0; i < E; i++) {
 			StringTokenizer st = new StringTokenizer(br.readLine());
 			int s = Integer.parseInt(st.nextToken());
 			int e = Integer.parseInt(st.nextToken());
 			int w = Integer.parseInt(st.nextToken());
-			edges.add(new edge(s, e, w));
+			pq.add(new edge(s, e, w));
 		}
-		Collections.sort(edges);
 		int ans = 0;
-		for (edge e : edges) {
-			if (find(e.s) != find(e.e)) {
-				union(e.s, e.e);
-				ans += e.w;
+		while (!pq.isEmpty()) {
+			edge cur = pq.poll();
+			if (find(cur.s) != find(cur.e)) {
+				union(cur.s, cur.e);
+				ans += cur.w;
 			}
 		}
 		System.out.println(ans);
