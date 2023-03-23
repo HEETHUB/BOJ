@@ -19,12 +19,14 @@ public class Main {
 			int w = Integer.parseInt(st.nextToken());
 			pq.add(new edge(s, e, w));
 		}
+		int cnt = 0;
 		int ans = 0;
-		while (!pq.isEmpty()) {
+		while (cnt < V-1) {
 			edge cur = pq.poll();
 			if (find(cur.s) != find(cur.e)) {
 				union(cur.s, cur.e);
 				ans += cur.w;
+				cnt++;
 			}
 		}
 		System.out.println(ans);
