@@ -1,11 +1,5 @@
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.PriorityQueue;
-import java.util.Stack;
-import java.util.StringTokenizer;
-import java.util.concurrent.PriorityBlockingQueue;
+import java.io.*;
+import java.util.*;
 
 public class Main {
 	public static void main(String[] args) throws Exception {
@@ -22,20 +16,15 @@ public class Main {
 		int size = 1;
 		for (int i = 1; i < N; i++) {
 			if (arr[i] > res[size-1]) res[size++] = arr[i];
-			else if (arr[i] <= res[0]) res[0] = arr[i];
 			else {
 				int left = 0;
 				int right = size-1;
-				while (left <= right) {
+				while (left < right) {
 					int mid = (left+right)/2;
-					if (arr[i] == res[mid]) break;
-					if (res[mid] > arr[i] && res[mid-1] < arr[i]) {
-						res[mid] = arr[i];
-						break;
-					} 
-					else if (res[mid] > arr[i]) right = mid-1;
+					if (res[mid] >= arr[i]) right = mid;
 					else if (res[mid] < arr[i]) left = mid+1; 
 				}
+				res[right] = arr[i];
 			}
 		}
 		System.out.println(size);
